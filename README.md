@@ -29,9 +29,9 @@ O projeto possui um **Makefile** que gerencia a compilação automatizada da bib
 
 | Comando | Descrição |
 | :--- | :--- |
-| `make` | Compila os arquivos `.c` e gera a biblioteca `libft.a`. |
+| `make` | Compila os arquivos `.c` e gera a biblioteca ``. |
 | `make clean` | Remove todos os arquivos objeto (`.o`) gerados. |
-| `make fclean` | Remove os arquivos objeto e o arquivo da biblioteca `libft.a`. |
+| `make fclean` | Remove os arquivos objeto e o arquivo da biblioteca ``. |
 | `make re` | Executa o `fclean` e o `make` novamente (reinicia a compilação). |
 
 ---
