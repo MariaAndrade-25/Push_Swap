@@ -20,6 +20,7 @@
 | --- | --- |
 | `parse_number.c` | Valida o que foi recebido |
 
+
 ## 🚀 Como Compilar e Usar
 
 O projeto possui um **Makefile** que gerencia a compilação automatizada da biblioteca gerando o arquivo estático ``.
