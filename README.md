@@ -16,7 +16,7 @@
 
 ### Funções do Push_Swap 
 
-| 'parse_number.c' | Válida o que foi recebido|
+| 'parse_number.c' | Válida o que foi recebido |
 
 ## 🚀 Como Compilar e Usar
 
