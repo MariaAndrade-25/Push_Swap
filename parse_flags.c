@@ -5,15 +5,15 @@
 parse_flag(int argc, char **argv)
 {
     int i;
+    char **tokens;
 
     if (!argv)
         return (0);
     i = 1;
     while (argv[i])
     {
-        ft_split(argv[i], " ")
+        tokens = ft_split(argv[i], " ")
         i++;
     }
+    
 }
-
-*str find_gap(char str)
