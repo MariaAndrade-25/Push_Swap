@@ -1,6 +1,5 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <limits.h>
+
+#include "push_swap.h"
 
 int is_valid_number(char *str)
 {
