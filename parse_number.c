@@ -6,31 +6,30 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:13 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/18 15:49:14 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/18 18:36:14 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-int is_valid_number(char *str)
+int	is_valid_number(char *str)
 {
-    int i;
-    i = 0;
+	int	i;
 
-    if (!str)
-        return (0);
-    if (str[i] == '-' || str[i] == '+')
+	i = 0;
+	if (!str)
+		return (0);
+	if (str[i] == '-' || str[i] == '+')
           i++;
-    if (str[i] == '\0')
-        return (0);
-    while (str[i] >= '0' && str[i] <= '9')
+	if (str[i] == '\0')
+		return (0);
+	while (str[i] >= '0' && str[i] <= '9')
         i++;
-    if (str[i] == '\0')
-        {
-            return (1);
-        }
-    return (0);
+	if (str[i] == '\0')
+	{
+		return (1);
+	}
+	return (0);
 }
 
 int	num_over(long num, int sign, int digit)

@@ -6,10 +6,11 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:32 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/18 16:15:34 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/18 16:46:08 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
 
 t_stack	*init_stack_a(int argc, char **argv)
 {
@@ -51,7 +52,6 @@ t_stack	*init_stack_b(int capacity)
 	return (stack);
 }
 
-// Libera a memória alocada para uma stack
 void	free_stack(t_stack *stack)
 {
 	if (!stack)
