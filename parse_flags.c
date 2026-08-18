@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/18 15:49:08 by malves-a          #+#    #+#             */
+/*   Updated: 2026/08/18 15:51:41 by malves-a         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "push_swap.h"
 
@@ -37,8 +49,6 @@ int	parse_flag(int argc, char **argv, t_stack *a)
 			{
 				free_tokens(tokens);
 				return (0);
-			}
-			// Aqui você insere o valor na sua stack A
 			a->values[a->size] = value;
 			a->size++;
 			j++;
