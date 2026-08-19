@@ -28,11 +28,23 @@ void	free_tokens(char **tokens)
 	free(tokens);
 }
 
+static int	store_token(char *token, t_stack *a)
+{
+	int	value;
+
+	if (!ft_atoi_safe(token, &value))
+		return (0);
+	if (a->size >= a->capacity)
+		return (0);
+	a->values[a->size] = value;
+	a->size++;
+	return (1);
+}
+
 int	parse_flag(int argc, char **argv, t_stack *a)
 {
 	int		i;
 	int		j;
-	int		value;
 	char	**tokens;
 
 	i = 1;
@@ -44,13 +56,11 @@ int	parse_flag(int argc, char **argv, t_stack *a)
 		j = 0;
 		while (tokens[j])
 		{
-			if (is_valid_number(tokens[j]) == 0
-				|| ft_atoi_safe(tokens[j], &value) == 0)
+			if (!store_token(tokens[j], a))
 			{
 				free_tokens(tokens);
 				return (0);
-			a->values[a->size] = value;
-			a->size++;
+			}
 			j++;
 		}
 		free_tokens(tokens);
