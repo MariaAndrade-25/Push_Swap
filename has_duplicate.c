@@ -12,21 +12,23 @@
 
 #include "push_swap.h"
 
-int	has_duplicate(t_stack *stack, int value)
+int	has_duplicate(t_stack *a)
 {
-	aux	t_stack*;
 	int	i;
+	int j;
 
 	i = 0;
 
-	if (!stack)
-		return (0);
-	while (aux[i] != '\0')
+	while (i < a -> size)
 	{
-		if (aux->value == value[i])
+		j = i + 1;
+		while ( j < a ->size)
 		{
-			return (1);
+			if ( a->values[i] == a->values[j])
+				return (1);
+			j++;
 		}
 		i++;
 	}
+	return (0);
 }
