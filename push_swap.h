@@ -27,6 +27,8 @@ typedef struct s_stack
 
 int		parse_flag(int argc, char **argv, t_stack *a);
 void	free_tokens(char **tokens);
+int		ft_atoi_safe(char *str, int *result);
+int		count_total_elements(int argc, char **argv);
 t_stack	*init_stack_a(int argc, char **argv);
 t_stack	*init_stack_b(int capacity);
 void	free_stack(t_stack *stack);
