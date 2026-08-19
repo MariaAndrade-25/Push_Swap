@@ -20,9 +20,9 @@
 
 typedef struct s_stack
 {
-	int	*values;
-	int	size;
-	int	capacity;
+	int	*values; #ponteiro para array livre;
+	int	size;   #acompanha o tamanho total;
+	int	capacity;  #definição de espaço.
 }	t_stack;
 
 int		parse_flag(int argc, char **argv, t_stack *a);
