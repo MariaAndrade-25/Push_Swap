@@ -12,7 +12,7 @@
 
 
 #ifndef PUSH_SWAP_H
-# MAX PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -20,9 +20,9 @@
 
 typedef struct s_stack
 {
-	int		*values;
-	long	size;
-	int		capacity;
+	int	*values;
+	int	size;
+	int	capacity;
 }	t_stack;
 
 int		parse_flag(int argc, char **argv, t_stack *a);
