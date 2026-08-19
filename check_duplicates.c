@@ -32,3 +32,17 @@ int	has_duplicate(t_stack *a)
 	}
 	return (0);
 }
+
+int	is_sorted(t_stack *a)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->size - 1)
+	{
+		if (a->values[i] > a->values[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
