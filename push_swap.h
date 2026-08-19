@@ -32,5 +32,7 @@ int		count_total_elements(int argc, char **argv);
 t_stack	*init_stack_a(int argc, char **argv);
 t_stack	*init_stack_b(int capacity);
 void	free_stack(t_stack *stack);
+int		is_sorted(t_stack *a);
+int	has_duplicates(t_stack *a);
 
 #endif
