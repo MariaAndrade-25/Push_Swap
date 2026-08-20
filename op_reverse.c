@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_reverse.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 17:41:53 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/19 18:42:50 by mtomanar         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:09:45 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	ft_reverse(t_stack *stack)
 	int	temp;
 	int	size; 
 	int	i;
-	
+
 	if (!stack || stack->size <= 1)
 		return ;
-	
+
 	size = stack->size - 1;
 	i = size;
 	temp = stack->values[size];

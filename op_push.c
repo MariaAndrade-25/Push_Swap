@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_push.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 16:20:37 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/19 17:44:22 by mtomanar         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:09:38 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_push(t_stack *from, t_stack *to)
 {
 	int	temp;
-	int i;
+	int	i;
 
 	if (!from || !to || from->size == 0)
 		return ;
@@ -28,7 +28,7 @@ void	ft_push(t_stack *from, t_stack *to)
 		i++;
 	}
 	i = to->size;
-	while(i > 0)
+	while (i > 0)
 	{
 		to->values[i] = to->values[i - 1];
 		i--;

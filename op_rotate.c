@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_rotate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 16:20:41 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/19 17:36:14 by mtomanar         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:09:51 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_rotate(t_stack *stack)
 {
 	int	temp;
 	int	i;
-	
+
 	if (!stack || stack->size <= 1)
 		return ;
 	temp = stack->values[0];

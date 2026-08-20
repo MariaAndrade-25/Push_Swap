@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   has_duplicate.c                                    :+:      :+:    :+:   */
+/*   check_duplicates.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 18:12:35 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/18 18:21:49 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/20 16:08:36 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	has_duplicate(t_stack *a)
 {
 	int	i;
-	int j;
+	int	j;
 
 	i = 0;
 
 	while (i < a -> size)
 	{
 		j = i + 1;
-		while ( j < a ->size)
+		while (j < a ->size)
 		{
-			if ( a->values[i] == a->values[j])
+			if (a->values[i] == a->values[j])
 				return (1);
 			j++;
 		}
