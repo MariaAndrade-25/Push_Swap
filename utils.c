@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 16:11:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 16:49:36 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/20 18:43:41 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	strcmp(const char *s1, const char *s2)
 
 	str1 = (unsigned char *) s1;
 	str2 = (unsigned char *) s2;
-
 	if (!str1 || !str2)
 		return (0);
 	i = 0;
@@ -99,4 +98,3 @@ int	strcmp(const char *s1, const char *s2)
 	else
 		return (str1[i] - str2[i]);
 }
-

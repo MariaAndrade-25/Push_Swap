@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:23 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 16:11:41 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/20 18:10:45 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ typedef struct s_stack
 }	t_stack;
 
 /* Parsing functions */
-int	parse_flags(t_config *config, int argc, char **argv);
+int		parse_args(int argc, char **argv, t_stack *a);
+int		parse_token(char *token, t_stack *a);
 void	free_tokens(char **tokens);
 int		ft_atoi_safe(char *str, int *result);
 int		count_total_elements(int argc, char **argv);
