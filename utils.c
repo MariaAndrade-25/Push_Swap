@@ -6,27 +6,11 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 16:11:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 18:43:41 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/20 19:01:33 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int	count_words(char const *s, char c)
-{
-	int			count;
-	char const	*start;
-
-	count = 0;
-	start = s;
-	while (*s)
-	{
-		if (*s != c && (s == start || *(s - 1) == c))
-			count++;
-		s++;
-	}
-	return (count);
-}
 
 static char	**alloc_result(char const *s, char c)
 
@@ -82,19 +66,10 @@ char	**ft_split(char const *s, char c)
 
 int	strcmp(const char *s1, const char *s2)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	int				i;
-
-	str1 = (unsigned char *) s1;
-	str2 = (unsigned char *) s2;
-	if (!str1 || !str2)
-		return (0);
-	i = 0;
-	while (str1[i] == str2[i] && str1[i] != '\0')
+	while (s1[i] == s2[i] && s1[i] != '\0')
 		i++;
-	if (str1[i] == str2[i])
+	if (s1[i] == s2[i])
 		return (0);
 	else
-		return (str1[i] - str2[i]);
+		return (s1[i] - s2[i]);
 }

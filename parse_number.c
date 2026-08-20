@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:13 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 18:44:19 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/20 19:07:11 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	parse_token(char *token, t_stack *a)
 {
 	int	value;
 
-	if (is_valid_number(token) == 0)
-		return (0);
 	if (ft_atoi_safe(token, &value) == 0)
 		return (0);
 	a->values[a->size] = value;
