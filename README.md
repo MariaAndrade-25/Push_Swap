@@ -1,39 +1,25 @@
-# Push_Swap - @42SP
+# push_swap
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Language-C-blue.svg" alt="Language" />
-  <img src="https://img.shields.io/badge/Norminette-Passing-success.svg" alt="Norminette" />
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License" />
-</p>
+Versão consolidada e corrigida a partir das duas versões originais.
 
-## 📝 Sobre o Projeto
+## Estrutura
+- Stack implementada com **array dinâmico**
+- Parsing de múltiplos argumentos e strings com espaços
+- Validação de inteiros e overflow
+- Detecção de duplicados
+- Operações completas: `sa`, `sb`, `ss`, `pa`, `pb`, `ra`, `rb`, `rr`, `rra`, `rrb`, `rrr`
+- Ordenação específica para até 5 números
+- Radix sort com normalização por índices para conjuntos maiores
 
-> ⚠️ **Aviso:** Todo o código foi escrito seguindo piamente as regras estritas de formatação e boas práticas da **Norminette**.
+## Compilar
+```bash
+make
+```
 
----
+## Executar
+```bash
+./push_swap 2 1 3 6 5 8
+./push_swap "2 1 3 6 5 8"
+```
 
-## 🛠️ Funções Implementadas
-
-### Funções do Push_Swap 
-
-| Arquivo | Função |
-| --- | --- |
-| `parse_number.c` | Valida o que foi recebido |
-
-
-## 🚀 Como Compilar e Usar
-
-O projeto possui um **Makefile** que gerencia a compilação automatizada da biblioteca gerando o arquivo estático ``.
-
-### Comandos Disponíveis:
-
-| Comando | Descrição |
-| :--- | :--- |
-| `make` | Compila os arquivos `.c` e gera a biblioteca ``. |
-| `make clean` | Remove todos os arquivos objeto (`.o`) gerados. |
-| `make fclean` | Remove os arquivos objeto e o arquivo da biblioteca ``. |
-| `make re` | Executa o `fclean` e o `make` novamente (reinicia a compilação). |
-
----
-
-## 📦 Como Incluir no seu Projeto
+Em caso de entrada inválida, o programa escreve `Error` em stderr.
