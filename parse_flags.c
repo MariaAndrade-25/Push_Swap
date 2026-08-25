@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:08 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 18:45:29 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:05:32 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ int	parse_config(int argc, char **argv, t_config *config)
 	}
 	return (i);
 }
-

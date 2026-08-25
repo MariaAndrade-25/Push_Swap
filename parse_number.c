@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/18 15:49:13 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/20 19:07:11 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:14:12 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,6 @@ int	ft_atoi_safe(char *str, int *result)
 		return (0);
 	*result = (int)(sign * num);
 	return (1);
-}
-
-void	free_tokens(char **tokens)
-{
-	int	i;
-
-	if (!tokens)
-		return ;
-	i = 0;
-	while (tokens[i])
-	{
-		free(tokens[i]);
-		i++;
-	}
-	free(tokens);
 }
 
 int	parse_token(char *token, t_stack *a)

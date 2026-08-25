@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 17:41:53 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/20 16:09:45 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 16:17:25 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 void	ft_reverse(t_stack *stack)
 {
 	int	temp;
-	int	size; 
+	int	size;
 	int	i;
 
 	if (!stack || stack->size <= 1)
 		return ;
-
 	size = stack->size - 1;
 	i = size;
 	temp = stack->values[size];
@@ -47,4 +46,3 @@ void	rrr(t_stack *stack_a, t_stack *stack_b)
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
 }
-

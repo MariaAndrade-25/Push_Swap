@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 16:20:37 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/20 16:09:38 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 15:56:55 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_push(t_stack *from, t_stack *to)
 
 	if (!from || !to || from->size == 0)
 		return ;
-
 	temp = from->values[0];
 	i = 0;
 	while (i < from->size - 1)
