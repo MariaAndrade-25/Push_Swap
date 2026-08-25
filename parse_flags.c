@@ -25,6 +25,22 @@ static t_strategy	parse_strategy_flag(const char *flag)
 	return (-1);
 }
 
+static int	parse_flag(char *arg, t_config *config)
+{
+	t_strategy	strategy;
+
+	if (ft_strcmp(arg, "--bench") == 0)
+	{
+		config->bench = 1;
+		return (0);
+	}
+	strategy = parse_strategy_flag(arg);
+	if (strategy == -1)
+		return (-1);
+	config->strategy = strategy;
+	return (0);
+}
+
 int	parse_config(int argc, char **argv, t_config *config)
 {
 	int	i;
@@ -34,15 +50,12 @@ int	parse_config(int argc, char **argv, t_config *config)
 	config->strategy = ADAPTIVE;
 	config->bench = 0;
 	i = 1;
-	while (i < argc)
+	while (i < argc && argv[i][0] == '-')
 	{
-		if (argv[i][0] != '-')
-			break ;
-		if (ft_strcmp(argv[i++], "--bench") == 0)
-			config->bench = 1;
-		else if (parse_strategy_flag(argv[i++]) != -1)
-			config->strategy = parse_strategy_flag(argv[i]);
+		if (parse_flag(argv[i], config) == -1)
+			return (-1);
+		i++;
 	}
-	else
-		return (-1);
+	return (i);
 }
+
