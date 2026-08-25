@@ -6,13 +6,13 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 16:13:23 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 16:13:25 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 19:03:12 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	count_words(char const *s, char c)
+int	count_words(char const *s, char c)
 {
 	int	count;
 	int	in_word;
@@ -21,7 +21,7 @@ static int	count_words(char const *s, char c)
 	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && !in_word)
+		if (*s != c && in_word == 0)
 		{
 			in_word = 1;
 			count++;
@@ -33,59 +33,62 @@ static int	count_words(char const *s, char c)
 	return (count);
 }
 
-static void	free_partial(char **result, int used)
+static char	**free_all(char **strs, int i)
 {
-	while (used > 0)
-		free(result[--used]);
-	free(result);
+	while (i >= 0)
+	{
+		free(strs[i]);
+		i--;
+	}
+	free(strs);
+	return (NULL);
+}
+
+static char	*get_next_word(char const **s, char c)
+{
+	int		len;
+	int		i;
+	char	*word;
+
+	len = 0;
+	while (**s == c)
+		(*s)++;
+	while ((*s)[len] && (*s)[len] != c)
+		len++;
+	word = malloc(sizeof(char) * (len + 1));
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (i < len)
+	{
+		word[i] = (*s)[i];
+		i++;
+	}
+	word[i] = '\0';
+	*s += len;
+	return (word);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**result;
+	char	**strs;
 	int		words;
 	int		i;
-	int		len;
 
 	if (!s)
 		return (NULL);
 	words = count_words(s, c);
-	result = malloc(sizeof(char *) * (words + 1));
-	if (!result)
+	strs = malloc(sizeof(char *) * (words + 1));
+	if (!strs)
 		return (NULL);
 	i = 0;
-	while (*s)
+	while (i < words)
 	{
-		while (*s == c)
-			s++;
-		if (!*s)
-			break ;
-		len = 0;
-		while (s[len] && s[len] != c)
-			len++;
-		result[i] = malloc(len + 1);
-		if (!result[i])
-			return (free_partial(result, i), NULL);
-		result[i][len] = '\0';
-		while (len-- > 0)
-			result[i][len] = s[len];
-		s += 0;
-		while (*s && *s != c)
-			s++;
+		strs[i] = get_next_word(&s, c);
+		if (!strs[i])
+			return (free_all(strs, i - 1));
 		i++;
 	}
-	result[i] = NULL;
-	return (result);
-}
-
-void	free_tokens(char **tokens)
-{
-	int	i;
-
-	if (!tokens)
-		return ;
-	i = 0;
-	while (tokens[i])
-		free(tokens[i++]);
-	free(tokens);
+	strs[i] = NULL;
+	return (strs);
 }

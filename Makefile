@@ -3,17 +3,21 @@ NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
-SRC = main.c split.c parse.c stack.c \
-	operations_swap.c operations_push.c \
-	operations_rotate.c operations_reverse.c \
-	sort.c sort_small.c sort_radix.c
+SRC = main.c push_swap.c split.c parse.c stack_init.c \
+	op_swap.c op_push.c \
+	op_rotate.c op_reverse.c \
+	sort_small.c sort_radix.c sort_chunk.c \
+	utils.c utils_chunk.c \
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) Makefile
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ)

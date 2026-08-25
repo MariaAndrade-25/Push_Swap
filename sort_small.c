@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:23:56 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/25 16:16:15 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 18:49:27 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	sort_three(t_stack *stack_a)
 	sort_two(stack_a);
 }
 
-void	sort_four_five(t_stack *stack_a, t_stack *stack_b)
+void	ft_sort_small(t_stack *stack_a, t_stack *stack_b)
 {
 	int	size;
 
@@ -69,7 +69,7 @@ void	sort_four_five(t_stack *stack_a, t_stack *stack_b)
 		pb(stack_a, stack_b);
 	}
 	sort_three(stack_a);
-	pa(stack_b);
+	pa(stack_a, stack_b);
 	if (size == 5)
-		pa(stack_b);
+		pa(stack_a, stack_b);
 }

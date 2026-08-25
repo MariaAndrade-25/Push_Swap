@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 16:18:59 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 16:19:00 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 17:58:29 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	word_count(char *s)
 	in_word = 0;
 	while (*s)
 	{
-		if (*s != ' ' && !in_word)
+		if (*s != ' ' && in_word == 0)
 		{
 			in_word = 1;
 			count++;
@@ -41,7 +41,10 @@ int	count_total_elements(int argc, char **argv)
 	total = 0;
 	i = 1;
 	while (i < argc)
-		total += word_count(argv[i++]);
+	{
+		total += word_count(argv[i]);
+		i++;
+	}
 	return (total);
 }
 
@@ -49,31 +52,48 @@ int	ft_atoi_safe(char *str, int *result)
 {
 	long	num;
 	int		sign;
-	int		i;
 
 	if (!str || !*str)
 		return (0);
 	num = 0;
 	sign = 1;
-	i = 0;
-	if (str[i] == '+' || str[i] == '-')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	if (!str[i])
+	if (*str == '-')
+		sign = -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	if (!*str)
 		return (0);
-	while (str[i])
+	while (*str)
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (*str < '0' || *str > '9')
 			return (0);
-		num = num * 10 + (str[i++] - '0');
-		if ((sign == 1 && num > INT_MAX)
-			|| (sign == -1 && num > (long)INT_MAX + 1))
+		num = (num * 10) + (*str - '0');
+		if (num > (long)INT_MAX + (sign == -1))
 			return (0);
+		str++;
 	}
 	*result = (int)(num * sign);
+	return (1);
+}
+
+static int	process_tokens(char **tokens, t_stack *stack)
+{
+	int	j;
+	int	value;
+
+	j = 0;
+	while (tokens[j])
+	{
+		if (!ft_atoi_safe(tokens[j], &value)
+			|| stack->size >= stack->capacity)
+		{
+			free_tokens(tokens);
+			return (0);
+		}
+		stack->values[stack->size++] = value;
+		j++;
+	}
+	free_tokens(tokens);
 	return (1);
 }
 
@@ -81,25 +101,16 @@ int	parse_args(int argc, char **argv, t_stack *stack)
 {
 	char	**tokens;
 	int		i;
-	int		j;
-	int		value;
 
 	i = 1;
 	while (i < argc)
 	{
-		tokens = ft_split(argv[i++], ' ');
+		tokens = ft_split(argv[i], ' ');
 		if (!tokens)
 			return (0);
-		j = 0;
-		while (tokens[j])
-		{
-			if (!ft_atoi_safe(tokens[j++], &value))
-				return (free_tokens(tokens), 0);
-			if (stack->size >= stack->capacity)
-				return (free_tokens(tokens), 0);
-			stack->values[stack->size++] = value;
-		}
-		free_tokens(tokens);
+		if (!process_tokens(tokens, stack))
+			return (0);
+		i++;
 	}
 	return (stack->size > 0);
 }

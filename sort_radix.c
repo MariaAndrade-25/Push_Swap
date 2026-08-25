@@ -6,7 +6,7 @@
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 15:54:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 16:18:29 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/08/25 18:40:30 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static int	max_bits(int size)
 	return (bits);
 }
 
-void	sort_radix(t_stack *a, t_stack *b)
+void	ft_sort_radix(t_stack *a, t_stack *b)
 {
 	int	*sorted;
 	int	size;
