@@ -66,12 +66,14 @@ void	ft_chunk_sort(t_stack *stack_a, t_stack *stack_b)
 	int	chunk;
 	int	start;
 	int	end;
+	int	total;
 
 	chunk = 0;
-	chunk_size = ft_sqrt(stack_a->size);
+	total = stack_a->size;
+	chunk_size = ft_sqrt(total);
 	start = chunk * chunk_size;
 	end = (chunk + 1) * chunk_size;
-	while (start < stack_a->size)
+	while (start < total)
 	{
 		ft_process_chunk(stack_a, stack_b, start, end);
 		chunk++;

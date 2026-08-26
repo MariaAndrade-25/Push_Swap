@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+static int	is_space(char character)
+
+{
+	return (character == ' ' || character == '\t' || character == '\n'
+		|| character == '\v' || character == '\f' || character == '\r');
+}
+
 static int	count_words_in_str(char *str)
 {
 	int	count;
@@ -21,12 +28,12 @@ static int	count_words_in_str(char *str)
 	in_word = 0;
 	while (*str)
 	{
-		if (*str != ' ' && !in_word)
+		if (!is_space(*str) && !in_word)
 		{
 			in_word = 1;
 			count++;
 		}
-		else if (*str == ' ')
+		else if (is_space(*str))
 			in_word = 0;
 		str++;
 	}

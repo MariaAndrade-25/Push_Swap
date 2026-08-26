@@ -52,3 +52,53 @@ void	sort_stack(t_stack *a, t_stack *b)
 		ft_sort_radix(a, b);
 	}
 }
+
+static t_strategy	choose_strategy(t_strategy strategy, double disorder)
+{
+	if (strategy != ADAPTIVE)
+		return (strategy);
+	if (disorder < 0.2)
+		return (SIMPLE);
+	if (disorder < 0.5)
+		return (MEDIUM);
+	return (COMPLEX);
+}
+
+void	sort_selected(t_stack *a, t_stack *b, t_strategy strategy,
+	 double disorder)
+{
+	strategy = choose_strategy(strategy, disorder);
+	normalize_stack(a);
+	if (strategy == SIMPLE)
+		ft_sort_simple(a, b);
+	else if (strategy == MEDIUM)
+		ft_chunk_sort(a, b);
+	else
+		ft_sort_radix(a, b);
+}
+
+void	ft_sort_simple(t_stack *a, t_stack *b)
+{
+	int	min_index;
+	int	i;
+
+	while (a->size > 0)
+	{
+		min_index = find_minindex(a);
+		if (min_index <= a->size / 2)
+		{
+			i = 0;
+			while (i++ < min_index)
+				ra(a);
+		}
+		else
+		{
+			i = 0;
+			while (i++ < a->size - min_index)
+				rra(a);
+		}
+		pb(a, b);
+	}
+	while (b->size > 0)
+		pa(a, b);
+}

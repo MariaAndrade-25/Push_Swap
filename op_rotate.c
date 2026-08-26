@@ -34,7 +34,7 @@ void	ra(t_stack *stack_a)
 	if (!stack_a || stack_a->size <= 1)
 		return ;
 	ft_rotate(stack_a);
-	print_operation("ra");
+	print_operation("ra", stack_a);
 }
 
 void	rb(t_stack *stack_b)
@@ -42,7 +42,7 @@ void	rb(t_stack *stack_b)
 	if (!stack_b || stack_b->size <= 1)
 		return ;
 	ft_rotate(stack_b);
-	print_operation("rb");
+	print_operation("rb", stack_b);
 }
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
@@ -52,5 +52,5 @@ void	rr(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
-	print_operation("rr");
+	print_operation("rr", stack_a);
 }

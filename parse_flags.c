@@ -12,24 +12,24 @@
 
 #include "push_swap.h"
 
-static t_strategy	parse_strategy_flag(const char *flag)
+static int	parse_strategy_flag(const char *flag)
 {
-	if (ft_strcmp(flag, "--simple") == 0)
+	if (strcmp(flag, "--simple") == 0)
 		return (SIMPLE);
-	if (ft_strcmp(flag, "--medium") == 0)
+	if (strcmp(flag, "--medium") == 0)
 		return (MEDIUM);
-	if (ft_strcmp(flag, "--complex") == 0)
+	if (strcmp(flag, "--complex") == 0)
 		return (COMPLEX);
-	if (ft_strcmp(flag, "--adaptive") == 0)
+	if (strcmp(flag, "--adaptive") == 0)
 		return (ADAPTIVE);
 	return (-1);
 }
 
 static int	parse_flag(char *arg, t_config *config)
 {
-	t_strategy	strategy;
+	int		strategy;
 
-	if (ft_strcmp(arg, "--bench") == 0)
+	if (strcmp(arg, "--bench") == 0)
 	{
 		config->bench = 1;
 		return (0);
@@ -50,7 +50,7 @@ int	parse_config(int argc, char **argv, t_config *config)
 	config->strategy = ADAPTIVE;
 	config->bench = 0;
 	i = 1;
-	while (i < argc && argv[i][0] == '-')
+	while (i < argc && argv[i][0] == '-' && argv[i][1] == '-')
 	{
 		if (parse_flag(argv[i], config) == -1)
 			return (-1);

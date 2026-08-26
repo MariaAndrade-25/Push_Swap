@@ -42,7 +42,7 @@ void	pa(t_stack *stack_a, t_stack *stack_b)
 	if (!stack_b || stack_b->size == 0)
 		return ;
 	ft_push(stack_b, stack_a);
-	print_operation("pa");
+	print_operation("pa", stack_a);
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
@@ -50,5 +50,5 @@ void	pb(t_stack *stack_a, t_stack *stack_b)
 	if (!stack_a || stack_a->size == 0)
 		return ;
 	ft_push(stack_a, stack_b);
-	print_operation("pb");
+	print_operation("pb", stack_a);
 }

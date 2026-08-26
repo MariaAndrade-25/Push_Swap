@@ -27,6 +27,7 @@ static t_stack	*alloc_stack(int capacity)
 	}
 	stack->size = 0;
 	stack->capacity = capacity;
+	stack->stats = NULL;
 	return (stack);
 }
 

@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+static int	is_space(char character, char separator)
+
+{
+	return (character == separator || character == '\t' || character == '\n'
+		|| character == '\v' || character == '\f' || character == '\r');
+}
+
 int	count_words(char const *s, char c)
 {
 	int	count;
@@ -21,12 +28,12 @@ int	count_words(char const *s, char c)
 	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && in_word == 0)
+		if (!is_space(*s, c) && in_word == 0)
 		{
 			in_word = 1;
 			count++;
 		}
-		else if (*s == c)
+		else if (is_space(*s, c))
 			in_word = 0;
 		s++;
 	}
@@ -66,9 +73,9 @@ static char	*get_next_word(char const **s, char c)
 	char	*word;
 
 	len = 0;
-	while (**s == c)
+	while (is_space(**s, c))
 		(*s)++;
-	while ((*s)[len] && (*s)[len] != c)
+	while ((*s)[len] && !is_space((*s)[len], c))
 		len++;
 	word = malloc(sizeof(char) * (len + 1));
 	if (!word)

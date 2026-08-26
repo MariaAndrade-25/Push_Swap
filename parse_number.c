@@ -62,13 +62,13 @@ int	parse_token(char *token, t_stack *a)
 	return (1);
 }
 
-int	parse_args(int argc, char **argv, t_stack *a)
+int	parse_args_from(int argc, char **argv, int start, t_stack *a)
 {
 	int		i;
 	int		j;
 	char	**tokens;
 
-	i = 1;
+	i = start;
 	while (i < argc)
 	{
 		tokens = ft_split(argv[i], ' ');
@@ -88,4 +88,9 @@ int	parse_args(int argc, char **argv, t_stack *a)
 		i++;
 	}
 	return (1);
+}
+
+int	parse_args(int argc, char **argv, t_stack *a)
+{
+	return (parse_args_from(argc, argv, 1, a));
 }

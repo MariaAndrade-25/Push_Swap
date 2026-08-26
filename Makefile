@@ -4,7 +4,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 CPPFLAGS = -MMD -MP
 
-SRC = main.c push_swap.c split.c parse.c parse_number.c \
+SRC = main.c push_swap.c split.c parse.c parse_number.c count_elements.c \
+	parse_flags.c disorder.c \
 	check_duplicates.c stack_init.c \
 	op_swap.c op_push.c \
 	op_rotate.c op_reverse.c \

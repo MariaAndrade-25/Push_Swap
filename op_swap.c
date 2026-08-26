@@ -28,7 +28,7 @@ void	sa(t_stack *stack_a)
 	if (!stack_a || stack_a->size < 2)
 		return ;
 	ft_swap(stack_a);
-	print_operation("sa");
+	print_operation("sa", stack_a);
 }
 
 void	sb(t_stack *stack_b)
@@ -36,7 +36,7 @@ void	sb(t_stack *stack_b)
 	if (!stack_b || stack_b->size < 2)
 		return ;
 	ft_swap(stack_b);
-	print_operation("sb");
+	print_operation("sb", stack_b);
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)
@@ -46,5 +46,5 @@ void	ss(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	ft_swap(stack_a);
 	ft_swap(stack_b);
-	print_operation("ss");
+	print_operation("ss", stack_a);
 }

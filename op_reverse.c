@@ -36,7 +36,7 @@ void	rra(t_stack *stack_a)
 	if (!stack_a || stack_a->size <= 1)
 		return ;
 	ft_reverse(stack_a);
-	print_operation("rra");
+	print_operation("rra", stack_a);
 }
 
 void	rrb(t_stack *stack_b)
@@ -44,7 +44,7 @@ void	rrb(t_stack *stack_b)
 	if (!stack_b || stack_b->size <= 1)
 		return ;
 	ft_reverse(stack_b);
-	print_operation("rrb");
+	print_operation("rrb", stack_b);
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
@@ -54,5 +54,5 @@ void	rrr(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	ft_reverse(stack_a);
 	ft_reverse(stack_b);
-	print_operation("rrr");
+	print_operation("rrr", stack_a);
 }

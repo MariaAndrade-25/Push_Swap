@@ -76,3 +76,45 @@ void	ft_chunk_index(t_stack *stack_a)
 	}
 	free(indexes);
 }
+
+void	normalize_stack(t_stack *stack)
+{
+	int	*copy;
+	int	i;
+
+	copy = malloc(sizeof(int) * stack->size);
+	if (!copy)
+		return ;
+	i = 0;
+	while (i < stack->size)
+	{
+		copy[i] = stack->values[i];
+		i++;
+	}
+	i = 0;
+	while (i < stack->size)
+	{
+		int j = i + 1;
+		while (j < stack->size)
+		{
+			if (copy[i] > copy[j])
+			{
+				int temp = copy[i];
+				copy[i] = copy[j];
+				copy[j] = temp;
+			}
+			j++;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < stack->size)
+	{
+		int j = 0;
+		while (j < stack->size && copy[j] != stack->values[i])
+			j++;
+		stack->values[i] = j;
+		i++;
+	}
+	free(copy);
+}
