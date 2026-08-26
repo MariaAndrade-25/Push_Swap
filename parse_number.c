@@ -32,8 +32,11 @@ int	ft_atoi_safe(char *str, int *result)
 	num = 0;
 	if (!str || !result)
 		return (0);
-	if (str[i++] == '-')
+	if (str[i] == '-')
+	{
 		sign = -1;
+		i++;
+	}
 	if (str[i] == '\0')
 		return (0);
 	while (str[i] >= '0' && str[i] <= '9')

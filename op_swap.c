@@ -25,16 +25,26 @@ void	ft_swap(t_stack *stack)
 
 void	sa(t_stack *stack_a)
 {
+	if (!stack_a || stack_a->size < 2)
+		return ;
 	ft_swap(stack_a);
+	print_operation("sa");
 }
 
 void	sb(t_stack *stack_b)
 {
+	if (!stack_b || stack_b->size < 2)
+		return ;
 	ft_swap(stack_b);
+	print_operation("sb");
 }
 
 void	ss(t_stack *stack_a, t_stack *stack_b)
 {
+	if ((!stack_a || stack_a->size < 2)
+		&& (!stack_b || stack_b->size < 2))
+		return ;
 	ft_swap(stack_a);
 	ft_swap(stack_b);
+	print_operation("ss");
 }

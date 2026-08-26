@@ -31,16 +31,26 @@ void	ft_rotate(t_stack *stack)
 
 void	ra(t_stack *stack_a)
 {
+	if (!stack_a || stack_a->size <= 1)
+		return ;
 	ft_rotate(stack_a);
+	print_operation("ra");
 }
 
 void	rb(t_stack *stack_b)
 {
+	if (!stack_b || stack_b->size <= 1)
+		return ;
 	ft_rotate(stack_b);
+	print_operation("rb");
 }
 
 void	rr(t_stack *stack_a, t_stack *stack_b)
 {
+	if ((!stack_a || stack_a->size <= 1)
+		&& (!stack_b || stack_b->size <= 1))
+		return ;
 	ft_rotate(stack_a);
 	ft_rotate(stack_b);
+	print_operation("rr");
 }

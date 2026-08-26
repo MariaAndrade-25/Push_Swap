@@ -12,6 +12,18 @@
 
 #include "push_swap.h"
 
+int	ft_sqrt(int n)
+{
+	int	root;
+
+	if (n <= 0)
+		return (0);
+	root = 1;
+	while (root * root < n)
+		root++;
+	return (root);
+}
+
 int	get_index(t_stack *stack_a, int value)
 {
 	int	index;

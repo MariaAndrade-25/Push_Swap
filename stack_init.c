@@ -30,6 +30,13 @@ static t_stack	*alloc_stack(int capacity)
 	return (stack);
 }
 
+t_stack	*init_stack(int capacity)
+{
+	if (capacity <= 0)
+		return (NULL);
+	return (alloc_stack(capacity));
+}
+
 t_stack	*init_stack_a(int argc, char **argv)
 {
 	int	total_elements;

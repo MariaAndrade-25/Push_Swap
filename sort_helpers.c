@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   sort_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 16:11:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 19:00:00 by malves-a         ###   ########.fr       */
+/*   Created: 2026/08/26 00:00:00 by malves-a          #+#    #+#             */
+/*   Updated: 2026/08/26 00:00:00 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	strcmp(const char *s1, const char *s2)
+void	sort_two(t_stack *stack_a)
 {
-	int	i;
+	if (is_sorted(stack_a) == 1)
+		return ;
+	sa(stack_a);
+}
 
-	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0')
-		i++;
-	if (s1[i] == s2[i])
-		return (0);
-	else
-		return (s1[i] - s2[i]);
+void	sort_three(t_stack *stack_a)
+{
+	sort_bottom(stack_a);
+	if (is_sorted(stack_a) == 1)
+		return ;
+	sort_two(stack_a);
 }

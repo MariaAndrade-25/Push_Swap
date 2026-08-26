@@ -33,16 +33,26 @@ void	ft_reverse(t_stack *stack)
 
 void	rra(t_stack *stack_a)
 {
+	if (!stack_a || stack_a->size <= 1)
+		return ;
 	ft_reverse(stack_a);
+	print_operation("rra");
 }
 
 void	rrb(t_stack *stack_b)
 {
+	if (!stack_b || stack_b->size <= 1)
+		return ;
 	ft_reverse(stack_b);
+	print_operation("rrb");
 }
 
 void	rrr(t_stack *stack_a, t_stack *stack_b)
 {
-	ft_rotate(stack_a);
-	ft_rotate(stack_b);
+	if ((!stack_a || stack_a->size <= 1)
+		&& (!stack_b || stack_b->size <= 1))
+		return ;
+	ft_reverse(stack_a);
+	ft_reverse(stack_b);
+	print_operation("rrr");
 }

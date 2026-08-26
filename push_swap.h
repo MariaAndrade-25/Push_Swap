@@ -58,6 +58,8 @@ int		ft_sqrt(int n);
 int		find_maxindex(t_stack *stack_a);
 int		find_minindex(t_stack *stack_a);
 void	ft_push_max(t_stack *stack_a, t_stack *stack_b);
+void	sort_two(t_stack *stack_a);
+void	sort_three(t_stack *stack_a);
 void	sort_top(t_stack *stack_a);
 void	sort_bottom(t_stack *stack_a);
 
@@ -95,5 +97,7 @@ void	rr(t_stack *stack_a, t_stack *stack_b);
 void	ft_sort_small(t_stack *a, t_stack *b);
 void	ft_chunk_sort(t_stack *a, t_stack *b);
 void	ft_sort_radix(t_stack *a, t_stack *b);
+
+void	print_operation(char *operation);
 
 #endif

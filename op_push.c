@@ -39,10 +39,16 @@ void	ft_push(t_stack *from, t_stack *to)
 
 void	pa(t_stack *stack_a, t_stack *stack_b)
 {
+	if (!stack_b || stack_b->size == 0)
+		return ;
 	ft_push(stack_b, stack_a);
+	print_operation("pa");
 }
 
 void	pb(t_stack *stack_a, t_stack *stack_b)
 {
+	if (!stack_a || stack_a->size == 0)
+		return ;
 	ft_push(stack_a, stack_b);
+	print_operation("pb");
 }

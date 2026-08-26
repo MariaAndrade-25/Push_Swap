@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   operation_log.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/20 16:11:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 19:00:00 by malves-a         ###   ########.fr       */
+/*   Created: 2026/08/26 00:00:00 by malves-a          #+#    #+#             */
+/*   Updated: 2026/08/26 00:00:00 by malves-a         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	strcmp(const char *s1, const char *s2)
+void	print_operation(char *operation)
 {
 	int	i;
 
 	i = 0;
-	while (s1[i] == s2[i] && s1[i] != '\0')
+	while (operation[i])
+	{
+		write(1, &operation[i], 1);
 		i++;
-	if (s1[i] == s2[i])
-		return (0);
-	else
-		return (s1[i] - s2[i]);
+	}
+	write(1, "\n", 1);
 }
