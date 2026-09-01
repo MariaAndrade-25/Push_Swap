@@ -22,7 +22,7 @@ static void	write_text(int fd, const char *text)
 	write(fd, text, length);
 }
 
-static void	write_long(int fd, long value)
+void	write_long(int fd, long value)
 {
 	char	buffer[24];
 	int		index;

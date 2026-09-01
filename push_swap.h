@@ -45,6 +45,7 @@ typedef struct s_config
 {
 	t_strategy	strategy;
 	int			bench;
+	int			count_only;
 }	t_config;
 
 typedef struct s_data
@@ -114,5 +115,6 @@ void	print_benchmark(t_stack *a, double disorder, t_strategy strategy);
 char	*strategy_name(t_strategy strategy);
 char	*strategy_complexity(t_strategy strategy);
 int		operation_index(char *operation);
+void	write_long(int fd, long value);
 
 #endif
