@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 00:00:00 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/26 00:00:00 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/09/01 15:38:47 by mtomanar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,24 @@ void	sort_two(t_stack *stack_a)
 
 void	sort_three(t_stack *stack_a)
 {
-	sort_bottom(stack_a);
-	if (is_sorted(stack_a) == 1)
+	int	a0;
+	int	a1;
+	int	a2;
+
+	if (stack_a->size <= 1 || is_sorted(stack_a))
 		return ;
-	sort_two(stack_a);
+	if (stack_a->size == 2)
+	{
+		sa(stack_a);
+		return ;
+	}
+	a0 = stack_a->values[0];
+	a1 = stack_a->values[1];
+	a2 = stack_a->values[2];
+	if (a0 > a1 && a0 > a2)
+		ra(stack_a);
+	else if (a1 > a0 && a1 > a2)
+		rra(stack_a);
+	if (!is_sorted(stack_a))
+		sa(stack_a);
 }

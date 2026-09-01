@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sort_radix.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/25 15:54:51 by malves-a          #+#    #+#             */
-/*   Updated: 2026/08/25 18:40:30 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/09/01 15:38:29 by mtomanar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	sort_copy(int *copy, int size)
+void	sort_copy(int *copy, int size)
 {
 	int	i;
 	int	j;
@@ -68,47 +68,45 @@ static int	*sorted_values(t_stack *a)
 	return (copy);
 }
 
-static int	max_bits(int size)
+static void	radix_pass(t_stack *a, t_stack *b, int *sorted, int bit)
 {
-	int	bits;
-	int	max;
+	int	count;
+	int	size;
 
-	bits = 0;
-	max = size - 1;
-	while (max > 0)
+	size = a->size;
+	count = a->size;
+	while (count-- > 0)
 	{
-		bits++;
-		max >>= 1;
+		if ((value_rank(sorted, size, a->values[0]) >> bit) & 1)
+			ra(a);
+		else
+			pb(a, b);
 	}
-	return (bits);
+	while (b->size > 0)
+		pa(a, b);
 }
 
 void	ft_sort_radix(t_stack *a, t_stack *b)
 {
 	int	*sorted;
-	int	size;
 	int	bits;
 	int	bit;
-	int	count;
+	int	max;
 
-	size = a->size;
 	sorted = sorted_values(a);
 	if (!sorted)
 		return ;
-	bits = max_bits(size);
+	max = a->size - 1;
+	bits = 0;
+	while (max > 0)
+	{
+		bits++;
+		max >>= 1;
+	}
 	bit = 0;
 	while (bit < bits)
 	{
-		count = a->size;
-		while (count-- > 0)
-		{
-			if ((value_rank(sorted, size, a->values[0]) >> bit) & 1)
-				ra(a);
-			else
-				pb(a, b);
-		}
-		while (b->size > 0)
-			pa(a, b);
+		radix_pass(a, b, sorted, bit);
 		bit++;
 	}
 	free(sorted);

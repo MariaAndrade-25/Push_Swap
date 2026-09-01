@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_small.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/20 12:23:56 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/25 18:49:27 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/09/01 15:38:33 by mtomanar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,13 @@ void	ft_sort_small(t_stack *stack_a, t_stack *stack_b)
 	int	size;
 
 	size = stack_a->size;
-	sort_top(stack_a);
-	pb(stack_a, stack_b);
-	if (size == 5)
+	while (size > 3)
 	{
 		sort_top(stack_a);
 		pb(stack_a, stack_b);
+		size--;
 	}
 	sort_three(stack_a);
-	pa(stack_a, stack_b);
-	if (size == 5)
+	while (stack_b->size > 0)
 		pa(stack_a, stack_b);
 }

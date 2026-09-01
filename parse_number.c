@@ -12,13 +12,27 @@
 
 #include "push_swap.h"
 
-int	num_over(long num, int sign, int digit)
+static int	num_over(long num, int sign, int digit)
 {
 	if (num > INT_MAX / 10)
 		return (1);
 	if (num == INT_MAX / 10 && digit > 7 + (sign == -1))
 		return (1);
 	return (0);
+}
+
+static int	get_sign(char *str, int *i)
+{
+	int	sign;
+
+	sign = 1;
+	if (str[*i] == '-' || str[*i] == '+')
+	{
+		if (str[*i] == '-')
+			sign = -1;
+		(*i)++;
+	}
+	return (sign);
 }
 
 int	ft_atoi_safe(char *str, int *result)
@@ -28,16 +42,9 @@ int	ft_atoi_safe(char *str, int *result)
 	long	num;
 
 	i = 0;
-	sign = 1;
+	sign = get_sign(str, &i);
 	num = 0;
-	if (!str || !result)
-		return (0);
-	if (str[i] == '-')
-	{
-		sign = -1;
-		i++;
-	}
-	if (str[i] == '\0')
+	if (!str || !result || str[i] == '\0')
 		return (0);
 	while (str[i] >= '0' && str[i] <= '9')
 	{
@@ -51,7 +58,7 @@ int	ft_atoi_safe(char *str, int *result)
 	return (1);
 }
 
-int	parse_token(char *token, t_stack *a)
+static int	parse_token(char *token, t_stack *a)
 {
 	int	value;
 
@@ -88,9 +95,4 @@ int	parse_args_from(int argc, char **argv, int start, t_stack *a)
 		i++;
 	}
 	return (1);
-}
-
-int	parse_args(int argc, char **argv, t_stack *a)
-{
-	return (parse_args_from(argc, argv, 1, a));
 }

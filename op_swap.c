@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   op_swap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malves-a <malves-a@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mtomanar <mtomanar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 16:20:45 by mtomanar          #+#    #+#             */
-/*   Updated: 2026/08/20 18:09:25 by malves-a         ###   ########.fr       */
+/*   Updated: 2026/09/01 15:39:07 by mtomanar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_swap(t_stack *stack)
 	if (!stack || stack->size < 2)
 		return ;
 	temp = stack->values[0];
-	stack->values[0] = stack->values [1];
+	stack->values[0] = stack->values[1];
 	stack->values[1] = temp;
 }
 
