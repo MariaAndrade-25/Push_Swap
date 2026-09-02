@@ -34,11 +34,6 @@ static int	parse_flag(char *arg, t_config *config)
 		config->bench = 1;
 		return (0);
 	}
-	if (ft_strcmp(arg, "--count") == 0)
-	{
-		config->count_only = 1;
-		return (0);
-	}
 	strategy = parse_strategy_flag(arg);
 	if (strategy == -1)
 		return (-1);
@@ -54,7 +49,6 @@ int	parse_config(int argc, char **argv, t_config *config)
 		return (-1);
 	config->strategy = ADAPTIVE;
 	config->bench = 0;
-	config->count_only = 0;
 	i = 1;
 	while (i < argc && argv[i][0] == '-' && argv[i][1] == '-')
 	{

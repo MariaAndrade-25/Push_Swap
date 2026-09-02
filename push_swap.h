@@ -45,7 +45,6 @@ typedef struct s_config
 {
 	t_strategy	strategy;
 	int			bench;
-	int			count_only;
 }	t_config;
 
 typedef struct s_data

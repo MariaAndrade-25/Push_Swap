@@ -105,10 +105,6 @@ int	main(int argc, char **argv)
 		sort_selected(data.a, data.b, cfg.strategy, dis);
 	if (cfg.bench)
 		print_benchmark(data.a, dis, get_used(cfg.strategy, dis));
-	if (cfg.count_only)
-	{
-    	write_long(1, data.a->stats->total);
-	}
 	free_stack(data.a);
 	free_stack(data.b);
 	return (0);

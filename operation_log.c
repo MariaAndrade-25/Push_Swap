@@ -85,10 +85,10 @@ void	print_benchmark(t_stack *a, double disorder, t_strategy strategy)
 		write(2, "0", 1);
 	write_long(2, percentage % 100);
 	write_text(2, "%\n[bench] strategy: ");
-	write_text(2, strategy_name(strategy));
+	//write_text(2, strategy_name(strategy));
 	write_text(2, " (");
 	write_text(2, strategy_complexity(strategy));
-	write_text(2, ")\n[bench] operations: ");
+	//write_text(2, ")\n[bench] operations: ");
 	write_long(2, a->stats->total);
 	print_counts(i);
 }
