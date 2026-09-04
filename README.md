@@ -1,92 +1,199 @@
-*This project has been created as part of the 42 curriculum by malves-a, mtomanar.*
+# 🔄 push_swap
 
-# push_swap
+> **Sort data on two stacks using the lowest possible number of actions.**
 
-> Sort data on two stacks using the lowest possible number of actions.
-
-A 42 school project: given a set of unique integers in stack `a` (stack `b`
-starts empty), display the smallest sequence of Push_swap operations that
-sorts `a` in ascending order. Built by **mtomanar** and **malves-a**.
-
----
-
-## Table of Contents
-
-1. [Rules](#rules)
-2. [Allowed Operations](#allowed-operations)
-3. [Build](#build)
-4. [Usage](#usage)
-5. [Flags](#flags)
-6. [Algorithms](#algorithms)
-7. [Data Structures](#data-structures)
-8. [Project Structure](#project-structure)
-9. [Performance Targets](#performance-targets)
-10. [Authors](#authors)
-11. [Resources](#resources)
-12. [AI Usage](#ai-usage)
-13. [Conclusion](#conclusion)
-
+[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge\&logo=42)](https://42.fr/)
+[![C](https://img.shields.io/badge/Language-C-A8B9CC?style=for-the-badge\&logo=c)](https://en.wikipedia.org/wiki/C_%28programming_language%29)
+[![Norminette](https://img.shields.io/badge/Style-Norminette-00ADD8?style=for-the-badge)](https://github.com/42School/norminette)
+[![Makefile](https://img.shields.io/badge/Build-Makefile-427819?style=for-the-badge)](https://www.gnu.org/software/make/)
 
 ---
 
-## Rules
+## 📌 About
 
-- Two stacks: **a** and **b**.
-- At the beginning, stack `a` contains a random amount of negative and/or
-  positive numbers, none of which are duplicated. Stack `b` is empty.
-- The goal is to sort in **ascending order** numbers into stack `a`.
-- The program must display the **smallest** list of instructions possible.
-- Instructions must be separated by `\n` and nothing else.
-- If no arguments are given, the program displays nothing and exits.
-- Invalid input (non-integer, duplicates, overflow) prints `Error` on stderr.
+**push_swap** is a sorting project from the **42 School curriculum**.
 
----
+The challenge is to sort a set of unique integers stored in **stack `a`**, using a second stack `b` and a restricted set of operations.
 
-## Allowed Operations
+The objective is not simply to sort the numbers, but to produce the sorting sequence using the **lowest possible number of operations**.
 
-| Operation | Description |
-|-----------|-------------|
-| `sa` | Swap the first 2 elements of stack `a`. Does nothing if there is one or no elements. |
-| `sb` | Swap the first 2 elements of stack `b`. Does nothing if there is one or no elements. |
-| `ss` | `sa` and `sb` at the same time. |
-| `pa` | Take the first element of `b` and put it at the top of `a`. Does nothing if `b` is empty. |
-| `pb` | Take the first element of `a` and put it at the top of `b`. Does nothing if `a` is empty. |
-| `ra` | Shift all elements of stack `a` up by 1. The first element becomes the last. |
-| `rb` | Shift all elements of stack `b` up by 1. The first element becomes the last. |
-| `rr` | `ra` and `rb` at the same time. |
-| `rra` | Shift all elements of stack `a` down by 1. The last element becomes the first. |
-| `rrb` | Shift all elements of stack `b` down by 1. The last element becomes the first. |
-| `rrr` | `rra` and `rrb` at the same time. |
+This implementation uses **array-based stacks**, coordinate compression and multiple sorting strategies selected according to the input disorder.
 
 ---
 
-## Build
+## 🎯 The Challenge
 
-```bash
-make        # compile push_swap
-make clean  # remove object files
-make fclean # remove object files and binary
-make re     # full rebuild
+At the beginning:
+
+```text
+        STACK A                 STACK B
+
+       ┌─────┐                 ┌─────┐
+       │  42 │                 │     │
+       ├─────┤                 │     │
+       │  -7 │                 │     │
+       ├─────┤                 │     │
+       │  19 │                 │     │
+       ├─────┤                 │     │
+       │  3  │                 │     │
+       └─────┘                 └─────┘
 ```
 
-The Makefile compiles with `-Wall -Wextra -Werror`.
+The program must transform the input into:
+
+```text
+        STACK A                 STACK B
+
+       ┌─────┐                 ┌─────┐
+       │ -7  │                 │     │
+       ├─────┤                 │     │
+       │  3  │                 │     │
+       ├─────┤                 │     │
+       │  19  │                 │     │
+       ├─────┤                 │     │
+       │  42  │                 │     │
+       └─────┘                 └─────┘
+```
+
+Only the allowed `push_swap` operations can be used.
 
 ---
 
-## Usage
+## 📚 Table of Contents
+
+* [Rules](#-rules)
+* [Allowed Operations](#-allowed-operations)
+* [Installation](#-installation)
+* [Usage](#-usage)
+* [Flags](#-flags)
+* [How It Works](#-how-it-works)
+* [Sorting Strategies](#-sorting-strategies)
+* [Data Structures](#-data-structures)
+* [Benchmark](#-benchmark)
+* [Project Structure](#-project-structure)
+* [Performance Targets](#-performance-targets)
+* [Authors](#-authors)
+* [Resources](#-resources)
+* [AI Usage](#-ai-usage)
+
+---
+
+# 📋 Rules
+
+The project follows the standard `push_swap` requirements:
+
+* Two stacks: **`a`** and **`b`**
+* Stack `b` starts empty
+* Stack `a` contains unique integers
+* Integers can be positive or negative
+* The final result must be sorted in ascending order
+* Only the allowed operations may be used
+* Operations are printed one per line
+* Invalid input prints `Error` to `stderr`
+* No arguments produces no output
+
+Invalid input includes:
+
+```text
+❌ Non-integer values
+❌ Duplicate numbers
+❌ Integer overflow
+```
+
+---
+
+# ⚙️ Allowed Operations
+
+### Swap
+
+| Operation | Description                          |
+| --------- | ------------------------------------ |
+| `sa`      | Swap the first two elements of `a`   |
+| `sb`      | Swap the first two elements of `b`   |
+| `ss`      | Perform `sa` and `sb` simultaneously |
+
+### Push
+
+| Operation | Description                            |
+| --------- | -------------------------------------- |
+| `pa`      | Push the first element of `b` onto `a` |
+| `pb`      | Push the first element of `a` onto `b` |
+
+### Rotate
+
+| Operation | Description                                 |
+| --------- | ------------------------------------------- |
+| `ra`      | Move the first element of `a` to the bottom |
+| `rb`      | Move the first element of `b` to the bottom |
+| `rr`      | Perform `ra` and `rb` simultaneously        |
+
+### Reverse Rotate
+
+| Operation | Description                             |
+| --------- | --------------------------------------- |
+| `rra`     | Move the last element of `a` to the top |
+| `rrb`     | Move the last element of `b` to the top |
+| `rrr`     | Perform `rra` and `rrb` simultaneously  |
+
+---
+
+# 🛠️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MariaAndrade-25/Push_Swap.git
+cd Push_Swap
+```
+
+Compile:
+
+```bash
+make
+```
+
+Available Makefile commands:
+
+```bash
+make
+make clean
+make fclean
+make re
+```
+
+The project is compiled using:
+
+```text
+-Wall -Wextra -Werror
+```
+
+---
+
+# 🚀 Usage
+
+The program accepts numbers either as separate arguments:
 
 ```bash
 ./push_swap 2 1 3 6 5 8
+```
+
+or as a quoted string:
+
+```bash
 ./push_swap "2 1 3 6 5 8"
+```
+
+Negative values are also supported:
+
+```bash
 ./push_swap 4 67 3 87 23 -5
 ```
 
-Arguments can be passed as separate integers or as quoted space-separated
-strings. The first argument is at the top of the stack.
+The **first argument represents the top of stack `a`**.
 
-**Example output:**
+### Example
 
-```
+```bash
 $ ./push_swap 2 1 3 6 5 8
 sa
 rra
@@ -94,210 +201,437 @@ rra
 
 ---
 
-## Flags
+# 🚩 Flags
 
-Flags must appear **before** the numeric arguments and start with `--`.
+The program supports different sorting strategies.
 
-| Flag | Description |
-|------|-------------|
-| `--simple` | Force the simple O(n^2) selection-sort strategy. |
-| `--medium` | Force the medium O(n sqrt(n)) chunk-sort strategy. |
-| `--complex` | Force the complex O(n log n) radix-sort strategy. |
-| `--adaptive` | **(default)** Automatically choose the best strategy based on disorder. |
-| `--bench` | Print a benchmark report to stderr after sorting. |
+| Flag         | Strategy                         |
+| ------------ | -------------------------------- |
+| `--simple`   | Selection-sort based strategy    |
+| `--medium`   | Chunk-based strategy             |
+| `--complex`  | Binary radix sort                |
+| `--adaptive` | Automatically selects a strategy |
+| `--bench`    | Displays benchmark information   |
+
+### Examples
+
+```bash
+./push_swap --simple 10 7 3 9 1 5
+```
+
+```bash
+./push_swap --medium "4 67 3 87 23"
+```
 
 ```bash
 ./push_swap --complex "4 67 3 87 23"
+```
+
+```bash
 ./push_swap --adaptive --bench 5 1 4 2 3
-./push_swap --simple --bench 10 7 3 9 1 5
-```
-
-**Benchmark output example** (to stderr):
-
-```
-Disorder:  73.33%
-Strategy:  complex
-Complexity: O(n log(n))
-Total ops: 42
-sa: 0 | sb: 0 | ss: 0
-pa: 6 | pb: 6 | ra: 12
-rb: 0 | rr: 0  | rra: 18
-rrb: 0 | rrr: 0
 ```
 
 ---
 
-## Algorithms
+# 🧠 How It Works
 
-Before sorting, the program computes a **disorder metric**: the ratio of
-inverted pairs to total pairs. Values are then coordinate-compressed to their
-ranks (0 to n-1), enabling all strategies to work with dense integers regardless
-of the original values.
+Before sorting, the program analyzes the input and calculates a **disorder metric**.
 
-### Simple -- O(n^2)
+The disorder represents the ratio of inverted pairs compared to the total number of possible pairs.
 
-A naive selection sort. Repeatedly finds the minimum element in stack `a`,
-rotates it to the top (choosing the shorter direction), pushes it to `b`,
-then pushes everything back to `a`.
+The values are then **coordinate-compressed** into ranks:
 
-Used when disorder is low (< 0.2), meaning the stack is nearly sorted.
+```text
+Original values:
 
-### Medium -- O(n sqrt(n))
+      42   -7   19   3
 
-A chunk-based sort. Partitions the normalized values into `sqrt(n)` chunks.
-For each chunk, pushes its elements from `a` to `b`. Then empties `b` back
-into `a` by repeatedly finding the maximum in `b`, rotating it to the top,
-and pushing it.
+          ↓
 
-Used when disorder is moderate (0.2 <= disorder < 0.5).
+Sorted:
 
-### Complex -- O(n log n)
+      -7    3   19   42
 
-An LSD (Least Significant Digit) binary radix sort. For each bit position
-from 0 to `log2(n)`, partitions elements by that bit: bits that are 0 go to
-`b` via `pb`, bits that are 1 stay in `a` via `ra`. After each pass,
-everything is pushed back from `b` to `a`. The number of passes is
-`ceil(log2(n))`.
+          ↓
 
-Used when disorder is high (>= 0.5), meaning the stack is heavily shuffled.
+Ranks:
 
-### Adaptive (default)
+       1    0    3    2
+```
 
-Selects the strategy automatically based on the disorder metric:
+This allows the sorting algorithms to operate on compact values from:
 
-| Disorder | Strategy |
-|----------|----------|
-| < 0.2 | Simple (nearly sorted -- few moves needed) |
-| 0.2 -- 0.5 | Medium (moderate shuffling) |
-| >= 0.5 | Complex (heavily shuffled) |
+```text
+0 → n - 1
+```
+
+The selected strategy depends on the amount of disorder.
 
 ---
 
-## Data Structures
+# 🧩 Sorting Strategies
+
+## 🟢 Simple — O(n²)
+
+A selection-sort based strategy.
+
+The algorithm repeatedly:
+
+1. Finds the minimum value in `a`
+2. Chooses the shortest rotation direction
+3. Moves the minimum to the top
+4. Pushes it to `b`
+5. Repeats
+6. Pushes everything back to `a`
+
+Recommended for:
+
+```text
+disorder < 0.2
+```
+
+The stack is already relatively close to being sorted.
+
+---
+
+## 🟡 Medium — O(n√n)
+
+A **chunk-based sorting strategy**.
+
+The normalized values are divided into approximately `√n` chunks.
+
+The algorithm:
+
+```text
+STACK A
+   │
+   ▼
+┌─────────┐
+│ Chunk 1 │
+├─────────┤
+│ Chunk 2 │
+├─────────┤
+│ Chunk 3 │
+├─────────┤
+│   ...   │
+└─────────┘
+   │
+   ▼
+ STACK B
+   │
+   ▼
+Rebuild A using maximum values
+```
+
+Recommended for:
+
+```text
+0.2 ≤ disorder < 0.5
+```
+
+---
+
+## 🔴 Complex — O(n log n)
+
+Uses **LSD binary radix sort**.
+
+For each bit position:
+
+```text
+bit = 0
+   │
+   ├── 0 → pb
+   │
+   └── 1 → ra
+```
+
+After processing all elements, the values pushed to `b` are returned to `a`.
+
+The number of passes is approximately:
+
+```text
+ceil(log₂(n))
+```
+
+Recommended for:
+
+```text
+disorder ≥ 0.5
+```
+
+---
+
+# 🤖 Adaptive Strategy
+
+The default strategy automatically selects the algorithm based on disorder:
+
+|    Disorder | Strategy   |
+| ----------: | ---------- |
+|     `< 0.2` | 🟢 Simple  |
+| `0.2 – 0.5` | 🟡 Medium  |
+|     `≥ 0.5` | 🔴 Complex |
+
+This allows the program to adapt to the characteristics of the input instead of always using the same algorithm.
+
+---
+
+# 🧱 Data Structures
+
+The project uses **arrays instead of linked lists**.
+
+### Stack
 
 ```c
 typedef struct s_stack
 {
-    int             *values;    // array of integers
-    long            size;       // current number of elements
-    int             capacity;   // allocated capacity
-    struct s_stats  *stats;     // operation counter (NULL if disabled)
+    int             *values;
+    long            size;
+    int             capacity;
+    struct s_stats  *stats;
 } t_stack;
+```
 
+Where:
+
+| Field      | Purpose                         |
+| ---------- | ------------------------------- |
+| `values`   | Array containing stack values   |
+| `size`     | Current number of elements      |
+| `capacity` | Allocated array capacity        |
+| `stats`    | Pointer to benchmark statistics |
+
+### Statistics
+
+```c
 typedef struct s_stats
 {
-    long    counts[11];  // one counter per operation (sa..rrr)
-    long    total;       // total operations executed
+    long counts[11];
+    long total;
 } t_stats;
+```
 
-typedef struct s_config
-{
-    t_strategy  strategy;   // SIMPLE, MEDIUM, COMPLEX, or ADAPTIVE
-    int         bench;      // 1 = print benchmark to stderr
-} t_config;
+The statistics structure keeps track of:
+
+```text
+sa
+sb
+ss
+pa
+pb
+ra
+rb
+rr
+rra
+rrb
+rrr
 ```
 
 ---
 
-## Project Structure
+# 📊 Benchmark
 
+The `--bench` flag provides information about the sorting process.
+
+Example:
+
+```text
+Disorder:  73.33%
+Strategy:  complex
+Complexity: O(n log(n))
+Total ops: 42
+
+sa: 0 | sb: 0 | ss: 0
+pa: 6 | pb: 6 | ra: 12
+rb: 0 | rr: 0 | rra: 18
+rrb: 0 | rrr: 0
 ```
+
+This makes it possible to analyze:
+
+* Input disorder
+* Selected algorithm
+* Theoretical complexity
+* Total operations
+* Number of each operation
+
+---
+
+# 📁 Project Structure
+
+```text
 push_swap/
-├── Makefile              # Build rules: all, clean, fclean, re
-├── push_swap.h           # Header: structs, enums, all prototypes
 │
-├── main.c                # Entry point, error handling, program flow
+├── Makefile
+├── push_swap.h
+├── main.c
 │
-│   ── Parsing (malves-a) ──
-├── split.c               # ft_split: tokenize strings by separator
-├── parse.c               # (placeholder -- logic in parse_number.c)
-├── parse_number.c        # ft_atoi_safe, parse_args, overflow checks
-├── count_elements.c      # Count total integers across all arguments
-├── parse_flags.c         # Parse --simple/--medium/--complex/--bench flags
+├── Parsing
+│   ├── split.c
+│   ├── parse.c
+│   ├── parse_number.c
+│   ├── count_elements.c
+│   └── parse_flags.c
 │
-│   ── Stack Management (malves-a) ──
-├── stack_init.c          # init_stack, free_stack, alloc_stack
-├── check_duplicates.c    # has_duplicate, is_sorted
-├── disorder.c            # compute_disorder: inverted-pair ratio
+├── Stack Management
+│   ├── stack_init.c
+│   ├── check_duplicates.c
+│   └── disorder.c
 │
-│   ── Operations (mtomanar) ──
-├── op_swap.c             # ft_swap, sa, sb, ss
-├── op_push.c             # ft_push, pa, pb
-├── op_rotate.c           # ft_rotate, ra, rb, rr
-├── op_reverse.c          # ft_reverse, rra, rrb, rrr
+├── Operations
+│   ├── op_swap.c
+│   ├── op_push.c
+│   ├── op_rotate.c
+│   └── op_reverse.c
 │
-│   ── Sorting Algorithms ──
-├── sort_small.c          # ft_sort_small: 3-5 elements (mtomanar)
-├── sort_helpers.c        # sort_two, sort_three (malves-a)
-├── sort_radix.c          # ft_sort_radix: LSD radix sort (malves-a)
-├── sort_chunk.c          # ft_chunk_sort: chunk-based sort (mtomanar)
-├── push_swap.c           # sort_stack, ft_sort_simple, strategy dispatch (malves-a)
+├── Sorting Algorithms
+│   ├── sort_small.c
+│   ├── sort_helpers.c
+│   ├── sort_radix.c
+│   ├── sort_chunk.c
+│   └── push_swap.c
 │
-│   ── Utilities ──
-├── utils.c               # strcmp
-├── utils_chunk.c         # ft_sqrt, normalize_stack, ft_haschunk (mtomanar)
-├── operation_log.c       # print_operation, print_benchmark (malves-a)
+└── Utilities
+    ├── utils.c
+    ├── utils_chunk.c
+    └── operation_log.c
 ```
 
 ---
 
-## Performance Targets
+# 📈 Performance Targets
 
-Based on the 42 correction sheet:
+The implementation targets the following operation limits:
 
-| Input Size | Maximum Allowed Operations |
-|------------|---------------------------|
-| 3 numbers | 2 |
-| 5 numbers | 12 |
-| 100 numbers | 700 |
-| 500 numbers | 5500 |
+|       Input | Maximum operations |
+| ----------: | -----------------: |
+|   3 numbers |              **2** |
+|   5 numbers |             **12** |
+| 100 numbers |            **700** |
+| 500 numbers |           **5500** |
 
----
-
-## Authors
-
-| Student | Role | Files |
-|---------|------|-------|
-| **mtomanar** | Operations & core algorithms | `op_swap.c`, `op_push.c`, `op_rotate.c`, `op_reverse.c`, `sort_small.c`, `sort_chunk.c`, `utils_chunk.c` |
-| **malves-a** | Parsing, validation, strategy & benchmark | `main.c`, `push_swap.c`, `split.c`, `parse.c`, `parse_number.c`, `count_elements.c`, `parse_flags.c`, `disorder.c`, `check_duplicates.c`, `stack_init.c`, `utils.c`, `sort_helpers.c`, `sort_radix.c`, `operation_log.c` |
+These targets are based on the 42 correction requirements.
 
 ---
 
-## Resources
+# 👥 Authors
 
-The following resources were used to understand the concepts required by the project:
+| Student      | Responsibilities                                    |
+| ------------ | --------------------------------------------------- |
+| **mtomanar** | Operations & core sorting algorithms                |
+| **malves-a** | Parsing, validation, strategy selection & benchmark |
 
-* **42 push_swap subject** — Official project requirements and allowed operations.
-* **C documentation** — Reference for arrays, pointers, structures, dynamic memory allocation, and functions.
-* **GNU C Library / C reference documentation** — Reference for standard C concepts and memory management.
-* **Algorithm and data structure references** — Used to understand sorting strategies, indexing, complexity, and stack manipulation.
-* **42 peer learning and code reviews** — Used to discuss implementation approaches and identify problems in the algorithms.
+### mtomanar
 
-## AI Usage
+```text
+op_swap.c
+op_push.c
+op_rotate.c
+op_reverse.c
+sort_small.c
+sort_chunk.c
+utils_chunk.c
+```
 
-AI tools were used as a learning and development aid during the project.
+### malves-a
 
-AI was mainly used for:
-
-* Explaining C concepts and pointer manipulation;
-* Discussing different ways of implementing stacks;
-* Understanding array-based stack operations;
-* Reviewing and debugging operation implementations;
-* Understanding sorting strategies such as simple sorting and chunk sorting;
-* Helping identify logic errors in the algorithms;
-* Refactoring functions to respect the 42 coding standards, including the 25-line function limit;
-* Reviewing code structure and suggesting improvements.
-
-AI was **not used to replace the understanding or implementation of the project**. The generated suggestions were reviewed, tested, adapted, and integrated manually.
-
-In particular, the implementation of the push, swap, rotate, reverse rotate, simple, small, and chunk components was developed and adapted as part of the project work.
+```text
+main.c
+push_swap.c
+split.c
+parse.c
+parse_number.c
+count_elements.c
+parse_flags.c
+disorder.c
+check_duplicates.c
+stack_init.c
+utils.c
+sort_helpers.c
+sort_radix.c
+operation_log.c
+```
 
 ---
 
-## Conclusion
+# 📚 Resources
 
-The `push_swap` project combines data structures, algorithm design, memory management, and optimization.
+The project was developed using resources related to:
 
-The implementation demonstrates how the choice of data structure and sorting strategy affects the number of operations required to solve the same problem.
+* **42 push_swap subject**
+* C language documentation
+* Arrays and pointers
+* Structures
+* Dynamic memory allocation
+* Stack data structures
+* Sorting algorithms
+* Algorithm complexity
+* Coordinate compression
+* Operation optimization
+* 42 peer learning and code reviews
 
-The use of specialized algorithms for small inputs and a chunk-based strategy for larger inputs provides a practical balance between simplicity, performance, and maintainability.
+---
+
+# 🤖 AI Usage
+
+AI tools were used as a **learning and development aid**.
+
+They were mainly used for:
+
+* Understanding C concepts
+* Understanding pointers and memory
+* Discussing array-based stack implementations
+* Reviewing and debugging operations
+* Understanding sorting strategies
+* Identifying logic errors
+* Improving code structure
+* Refactoring functions according to 42 standards
+* Reviewing algorithmic approaches
+
+AI was **not used as a replacement for understanding or implementing the project**.
+
+Suggestions were reviewed, tested, adapted and integrated manually.
+
+---
+
+# 🏁 Conclusion
+
+`push_swap` brings together several fundamental programming concepts:
+
+```text
+       DATA STRUCTURES
+              │
+              ▼
+        ALGORITHMS
+              │
+              ▼
+       MEMORY MANAGEMENT
+              │
+              ▼
+         OPTIMIZATION
+              │
+              ▼
+        PERFORMANCE
+```
+
+The project demonstrates how different sorting strategies can produce significantly different numbers of operations for the same input.
+
+By combining:
+
+* Array-based stacks
+* Coordinate compression
+* Multiple sorting algorithms
+* Adaptive strategy selection
+* Operation tracking
+* Benchmarking
+
+the project explores the relationship between **algorithm choice, data structures and performance**.
+
+---
+
+<div align="center">
+
+### 💻 Built as part of the 42 School curriculum
+
+**push_swap — Sort smarter, not harder.**
+
+</div>
